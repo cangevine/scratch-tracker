@@ -1,16 +1,16 @@
 (function(ext) {
 
     // Commands
-    ext.isFaceFound = function() {
-        return true;
+    ext.isFaceFound = function(callback) {
+        callback(true);
     };
 
     ext.getFaceX = function(callback) {
-      return (Math.random() * 500) - 250;
+      callback((Math.random() * 500) - 250);
     };
     
     ext.getFaceY = function(callback) {
-      return (Math.random() * 300) - 150;
+      callback((Math.random() * 300) - 150);
     };
 
     // Required method called when the Scratch project removes the extension
