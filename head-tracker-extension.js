@@ -13,7 +13,7 @@
 			$("body").append($inputCanvas);
 			
 			var htracker = new headtrackr.Tracker();
-		  htracker.init(videoInput, canvasInput);
+		  htracker.init($inputVideo, $inputCanvas);
 		  htracker.start();
 		  
 		  var headX = 0;
