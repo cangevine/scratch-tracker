@@ -3,7 +3,7 @@
 			console.log('headtrackr library is already loaded');
 			startTracking();
 		} else {
-			$.getScript('https://raw.githubusercontent.com/auduno/headtrackr/master/headtrackr.js', startTracking);
+			$.getScript('http://rawgit.com/auduno/headtrackr/master/headtrackr.js', startTracking);
 		}
 		
 		function startTracking() {
