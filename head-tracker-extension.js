@@ -40,8 +40,8 @@
         // 
         blocks: [
             ['R', 'found a face?', 'isFaceFound'],
-            ['R', 'current latitude', 'getLat'],
-            ['R', 'current longitude', 'getLong']
+            ['R', 'face X position', 'getFaceX'],
+            ['R', 'face Y position', 'getFaceY']
         ],
         menus: {
         },
@@ -53,5 +53,5 @@
     //   1. The extension name. This MUST be unique.
     //   2. A descriptor object.
     //   3. An extensions instance.
-    ScratchExtensions.register('@cangevine - Head Tracker', descriptor, ext);
+    ScratchExtensions.register('Head Tracker', descriptor, ext);
 })({});
