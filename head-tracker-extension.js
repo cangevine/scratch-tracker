@@ -21,7 +21,7 @@
 		}
 		
 	  $(document).on("headtrackrStatus", function(event) {
-	  	console.log("status update! ",event.status);
+	  	console.log("status update! ",event);
 	  	if (event.status == "found") {
 	  		foundAFace = true;
 		  	console.log("found a face!!");
@@ -34,6 +34,13 @@
 		  	console.log("awww. lost.");
 		  }
 	  });
+		
+		$(document).on("facetrackingEvent", function(event) {
+			console.log("facetrackingEvent: ",event);
+			headX = event.x;
+			headY = event.y;
+			headZ = event.z;
+		});
 		
 		$(document).on("headtrackingEvent", function(event) {
 			console.log("headtrackingEvent fired! x: ",event.x," y: ",event.y," z: ",event.z);
