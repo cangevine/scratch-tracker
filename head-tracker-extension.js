@@ -21,7 +21,7 @@
 		}
 		
 	  $(document).on("headtrackrStatus", function(event) {
-	  	console.log("headtrackrStatus fired! ",event);
+	  	console.log("headtrackrStatus fired! ",event.status);
 	  	if (event.status == "found") {
 	  		foundAFace = true;
 		  	console.log("found a face!!");
@@ -44,9 +44,12 @@
 		
 		// Commands
 		
-		ext.turnOnCamera = function(callback) {
+		ext.turnOnCamera = function() {
+			console.log("Turning on camera...");
+			var $vid = $("#inputVideo")[0];
+			var $can = $("#inputCanvas")[0];
 			var htracker = new headtrackr.Tracker();
-		  htracker.init($("#inputVideo"), $("#inputCanvas"));
+		  htracker.init($vid, $can);
 		  htracker.start();
 		}
 		
