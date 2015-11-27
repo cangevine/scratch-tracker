@@ -36,11 +36,11 @@
 	  });
 		
 		$(document).on("facetrackingEvent", function(event) {
-			console.log("facetrackingEvent: ",event.height);
+			console.log("facetrackingEvent: ",event);
 		});
 		
 		$(document).on("headtrackingEvent", function(event) {
-			console.log("headtrackingEvent fired! x: ",event.x," y: ",event.y," z: ",event.z);
+			//console.log("headtrackingEvent fired! x: ",event.x," y: ",event.y," z: ",event.z);
 			headX = event.x;
 			headY = event.y;
 			headZ = event.z;
