@@ -7,6 +7,8 @@
 		}
 		
 		var htracker;
+		var faceWid = 0;
+		var faceHei = 0;
 		var headX = 0;
 	  var headY = 0;
 	  var headZ = 0;
@@ -21,7 +23,7 @@
 		}
 		
 	  $(document).on("headtrackrStatus", function(event) {
-	  	console.log("status update! ",event.status);
+	  	console.log("status update! ",event.originalEvent.status);
 	  	if (event.status == "found") {
 	  		foundAFace = true;
 		  	console.log("found a face!!");
@@ -36,11 +38,11 @@
 	  });
 		
 		$(document).on("facetrackingEvent", function(event) {
-			console.log("facetrackingEvent: ",event.originalEvent);
+			headWid = event.originalEvent.width;
+			headHei = event.originalEvent.height;
 		});
 		
 		$(document).on("headtrackingEvent", function(event) {
-			//console.log("headtrackingEvent fired! x: ",event.x," y: ",event.y," z: ",event.z);
 			headX = event.originalEvent.x;
 			headY = event.originalEvent.y;
 			headZ = event.originalEvent.z;
@@ -57,20 +59,25 @@
 		  htracker.start();
 		}
 		
-    ext.isFaceFound = function(callback) {
-        callback(foundAFace);
+    ext.isFaceFound = function() {
+        return foundAFace;
     };
 
-    ext.getHeadX = function(callback) {
+    ext.getHeadX = function() {
       return headX;
     };
-    
-    ext.getHeadY = function(callback) {
-      callback(headY);
+    ext.getHeadY = function() {
+      return headY;
+    };
+    ext.getHeadZ = function() {
+      return headZ;
     };
     
-    ext.getHeadZ = function(callback) {
-      callback(headZ);
+    ext.getFaceWidth = function() {
+      return faceWid;
+    };
+    ext.getFaceHeight = function() {
+      return faceHei;
     };
 
     // Required method called when the Scratch project removes the extension
@@ -100,10 +107,12 @@
         // 
         blocks: [
         		[' ', 'start headtracking', 'turnOnCamera'],
-            ['R', 'found a face?', 'isFaceFound'],
+            ['r', 'found a face?', 'isFaceFound'],
             ['r', 'head X position', 'getHeadX'],
-            ['R', 'head Y position', 'getHeadY'],
-            ['R', 'head Z position', 'getHeadZ']
+            ['r', 'head Y position', 'getHeadY'],
+            ['r', 'head Z position', 'getHeadZ'],
+            ['r', 'face width', 'getFaceWidth'],
+            ['r', 'face height', 'getFaceHei']
         ],
         menus: {
         },
