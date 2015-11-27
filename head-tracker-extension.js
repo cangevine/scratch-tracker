@@ -21,7 +21,7 @@
 		}
 		
 	  $(document).on("headtrackrStatus", function(event) {
-	  	console.log("headtrackrStatus fired! ",event.status);
+	  	console.log("status update! ",event.status);
 	  	if (event.status == "found") {
 	  		foundAFace = true;
 		  	console.log("found a face!!");
@@ -36,7 +36,7 @@
 	  });
 		
 		$(document).on("headtrackingEvent", function(event) {
-			console.log("headtrackingEvent fired! ",event);
+			console.log("headtrackingEvent fired! x: ",event.x," y: ",event.y," z: ",event.z);
 			headX = event.x;
 			headY = event.y;
 			headZ = event.z;
