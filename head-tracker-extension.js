@@ -92,6 +92,7 @@
         //    'R' : asynchronous reporter block
         // 
         blocks: [
+        		[' ', 'start headtracking', 'turnOnCamera'],
             ['R', 'found a face?', 'isFaceFound'],
             ['r', 'head X position', 'getHeadX'],
             ['R', 'head Y position', 'getHeadY'],
