@@ -13,6 +13,8 @@
 	  var headY = 0;
 	  var headZ = 0;
 	  var foundAFace = false;
+	  var triggerRedetecting = false;
+	  var triggerFound = false;
 		
 		function startTracking() {
 			var $inputVideo = $('<video id="inputVideo" autoplay loop></video>');
@@ -24,31 +26,27 @@
 		
 	  $(document).on("headtrackrStatus", function(event) {
 	  	console.log("status update! ",event.originalEvent.status);
-	  	if (event.status == "found") {
+	  	if (event.originalEvent.status == "found") {
 	  		foundAFace = true;
-		  	console.log("found a face!!");
+	  		triggerFound = true;
 		  }
-		  if (event.status == "detecting") {
-		  	console.log("searching...");
+		  if (event.originalEvent.status == "detecting" || event.originalEvent.status == "redetecting") {
+		  	triggerRedetecting = true;
 		  }
-		  if (event.status == "lost") {
+		  if (event.originalEvent.status == "lost") {
 		  	foundAFace = false;
-		  	console.log("awww. lost.");
+		  	triggerRedetecting = true;
 		  }
 	  });
-		
 		$(document).on("facetrackingEvent", function(event) {
-			headWid = event.originalEvent.width;
-			headHei = event.originalEvent.height;
+			faceWid = event.originalEvent.width;
+			faceHei = event.originalEvent.height;
 		});
-		
 		$(document).on("headtrackingEvent", function(event) {
 			headX = event.originalEvent.x;
 			headY = event.originalEvent.y;
 			headZ = event.originalEvent.z;
 		});
-		
-		// Commands
 		
 		ext.turnOnCamera = function() {
 			console.log("Turning on camera...");
@@ -79,6 +77,21 @@
     ext.getFaceHeight = function() {
       return faceHei;
     };
+    
+    ext.foundHat = function() {
+    	if (triggerFound) {
+    		triggerFound = false;
+    		return true;
+    	}
+    	return false;
+    }
+    ext.redetectingHat = function() {
+    	if (triggerRedetecting) {
+    		triggerRedetecting = false;
+    		return true;
+    	}
+    	return false;
+    }
 
     // Required method called when the Scratch project removes the extension
     // or the user leaves the project.
@@ -107,6 +120,8 @@
         // 
         blocks: [
         		[' ', 'start headtracking', 'turnOnCamera'],
+        		['h', 'when a face is found', 'foundHat'],
+        		['h', 'when a face is lost', 'redetectingHat'],
             ['r', 'found a face?', 'isFaceFound'],
             ['r', 'head X position', 'getHeadX'],
             ['r', 'head Y position', 'getHeadY'],
