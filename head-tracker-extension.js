@@ -30,10 +30,7 @@
 	  		foundAFace = true;
 	  		triggerFound = true;
 		  }
-		  if (event.originalEvent.status == "detecting" || event.originalEvent.status == "redetecting") {
-		  	triggerRedetecting = true;
-		  }
-		  if (event.originalEvent.status == "lost") {
+		  if (event.originalEvent.status == "detecting" || event.originalEvent.status == "redetecting" || event.originalEvent.status == "lost") {
 		  	foundAFace = false;
 		  	triggerRedetecting = true;
 		  }
